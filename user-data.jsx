@@ -127,19 +127,19 @@ const USER = {
   // Écran 9 — Playlist
   playlist: [
     { name: "Gratin dauphinois familial",  tag: "Parce que 62 kg de pommes de terre",   dur: "50 min", diff: "Facile",
-      img: ""icons/recipes/gratin.jpg"" },
+      img: "icons/recipes/gratin.jpg" },
     { name: "Bolognaise du dimanche",       tag: "Ton rituel famille",                   dur: "1h15",   diff: "Facile",
-      img: ""icons/recipes/bolognaise.webp"" },
+      img: "icons/recipes/bolognaise.webp" },
     { name: "Tartine houmous-radis",        tag: "Pour ton côté Ravitailleur",           dur: "10 min", diff: "Facile",
-      img: ""icons/recipes/houmous.webp"" },
+      img: "icons/recipes/houmous.webp" },
     { name: "Poulet rôti aux légumes",      tag: "Parce que dimanche, c'est dimanche",   dur: "1h10",   diff: "Facile",
-      img: ""icons/recipes/poulet.webp"" },
+      img: "icons/recipes/poulet.webp" },
     { name: "Soupe poireau-pomme de terre", tag: "Ton rayon F&L adore",                  dur: "35 min", diff: "Facile",
-      img: ""icons/recipes/soupe.jpg"" },
+      img: "icons/recipes/soupe.jpg" },
     { name: "Tarte tomate-moutarde",        tag: "Parce que tomates = été = joie",       dur: "40 min", diff: "Facile",
-      img: ""icons/recipes/tarte.jpg"" },
+      img: "icons/recipes/tarte.jpg" },
     { name: "Cookies du goûter",            tag: "Jamais assez, avec 4 à nourrir",       dur: "25 min", diff: "Très facile",
-      img: ""icons/recipes/cookies.webp"" },
+      img: "icons/recipes/cookies.webp" },
   ],
 };
 
