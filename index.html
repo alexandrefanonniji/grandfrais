@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Mon Annee Grand Frais — Wrapped 2026</title>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+  html, body { margin: 0; padding: 0; background: #faf9f5; }
+  #root { width: 100%; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  #__loader {
+    position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: #faf9f5; z-index: 9999;
+    font: 14px/1.4 -apple-system, BlinkMacSystemFont, sans-serif; color: #666;
+  }
+  #__loader .ball { width: 80px; height: 80px; border-radius: 50%; background: #cdd508; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 32px; color: #292929; animation: pulse 1.2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+  #__err {
+    position: fixed; bottom: 12px; left: 12px; right: 12px; z-index: 99999;
+    font: 12px/1.5 ui-monospace, monospace; background: #2a1215; color: #ff8a80;
+    padding: 12px 14px; border-radius: 8px; border: 1px solid #5c2b2e;
+    white-space: pre-wrap; max-height: 40vh; overflow: auto; display: none;
+  }
+</style>
+</head>
+<body>
+<div id="__loader"><div class="ball">26</div></div>
+<div id="__err"></div>
+<div id="root"></div>
+
+<!-- React + Babel depuis unpkg, sans integrity (les hashes SRI causaient le blocage) -->
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"></script>
+
+<!-- Les fichiers JSX sont chargés et transpiles par Babel dans l'ordre -->
+<script type="text/babel" data-presets="react" src="primitives.jsx"></script>
+<script type="text/babel" data-presets="react" src="user-data.jsx"></script>
+<script type="text/babel" data-presets="react" src="share-overlay.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen1.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen2.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen3.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen5.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen6.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen7.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen8.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen9.jsx"></script>
+<script type="text/babel" data-presets="react" src="screens/screen10.jsx"></script>
+<script type="text/babel" data-presets="react" src="app.jsx"></script>
+
+<!-- Montage React -->
+<script type="text/babel" data-presets="react">
+  (function () {
+    try {
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App/>);
+      const l = document.getElementById("__loader");
+      if (l) l.style.display = "none";
+    } catch (e) {
+      const box = document.getElementById("__err");
+      box.style.display = "block";
+      box.textContent = "Erreur au rendu : " + (e && e.message ? e.message : e);
+      const l = document.getElementById("__loader");
+      if (l) l.style.display = "none";
+    }
+  })();
+</script>
+
+<!-- Capture des erreurs (SRI, 404, JS, etc.) pour que la page ne reste pas blanche en silence -->
+<script>
+  (function () {
+    const box = document.getElementById("__err");
+    function show(msg) {
+      box.style.display = "block";
+      box.textContent += (box.textContent ? "\n" : "") + msg;
+      const l = document.getElementById("__loader");
+      if (l) l.style.display = "none";
+    }
+    window.addEventListener("error", function (e) {
+      const src = (e.target && (e.target.src || e.target.href)) || e.filename || "";
+      show("[error] " + (e.message || "load failed") + (src ? " - " + src.split("/").slice(-2).join("/") : ""));
+    }, true);
+    // Si apres 8s Babel n'a toujours pas rendu, c'est qu'un JSX a echoue silencieusement
+    setTimeout(function () {
+      if (!document.getElementById("root").hasChildNodes()) {
+        show("La page n'a pas fini de se charger. Ouvre la console (F12) pour voir l'erreur.");
+      }
+    }, 8000);
+  })();
+</script>
+</body>
+</html>
